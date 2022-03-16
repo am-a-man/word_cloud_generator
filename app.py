@@ -11,11 +11,15 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
  
-def test():
+def test(keyword):
 
     # Reads 'Youtube04-Eminem.csv' file
     # df = p    d.read_csv(r"Youtube04-Eminem.csv", encoding ="latin-1")
-    jsonData = requests.get("https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v1/init").content
+    jsonData
+    if keyword:
+        jsonData = requests.get(f"https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v2/init/{keyword}").content
+    else:
+        jsonData = requests.get("https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v1/init").content
     data = json.loads(jsonData)['data']
 
     stringData = ""
@@ -59,10 +63,10 @@ def test():
     plt.savefig("./static/wordCloud.png")
     
 
-@app.route("/")
-def hello_world():
+@app.route("/<string: keyword>")
+def hello_world(keyword):
     print("[root]: processing GET request at '/'")
-    test()
+    test(keyword)
     return "<img src='./static/wordCloud.png'>"
 
 
