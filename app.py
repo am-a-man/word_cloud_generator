@@ -63,11 +63,16 @@ def test(keyword):
     plt.savefig("./static/wordCloud.png")
     
 
-@app.route("/<string: keyword>")
-def hello_world(keyword):
+@app.route("/api/v1/<string:keyword>")
+def getData(keyword):
     print("[root]: processing GET request at '/'")
     test(keyword)
     return "<img src='./static/wordCloud.png'>"
+
+
+@app.route('/')
+def getStatus():
+    return "<p>{Status: 1}</p>"
 
 
 if __name__ == "__main__":  
