@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 
  
 def test():
+
     # Reads 'Youtube04-Eminem.csv' file
     # df = p    d.read_csv(r"Youtube04-Eminem.csv", encoding ="latin-1")
     jsonData = requests.get("https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v1/init").content
@@ -60,10 +61,11 @@ def test():
 
 @app.route("/")
 def hello_world():
+    print("[root]: processing GET request at '/'")
     test()
-    
     return "<img src='./static/wordCloud.png'>"
 
 
 if __name__ == "__main__":  
+    print("[root]: starting app")
     app.run(debug=False, host='0.0.0.0')
