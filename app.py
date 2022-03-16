@@ -15,13 +15,13 @@ def test(keyword):
 
     # Reads 'Youtube04-Eminem.csv' file
     # df = p    d.read_csv(r"Youtube04-Eminem.csv", encoding ="latin-1")
-    jsonData
+    # jsonData
     if keyword:
         jsonData = requests.get(f"https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v2/init/{keyword}").content
     else:
         jsonData = requests.get("https://analyzeit.herokuapp.com/api/twitter/sentiment_analysis/v1/init").content
     data = json.loads(jsonData)['data']
-
+    
     stringData = ""
     for tweet in data:
         stringData += tweet['tweet']
@@ -65,9 +65,9 @@ def test(keyword):
 
 @app.route("/api/v1/<string:keyword>")
 def getData(keyword):
-    print("[root]: processing GET request at '/'")
+    print("[root]: processing GET request at '/api/v1/<string:keyword>'")
     test(keyword)
-    return "<img src='./static/wordCloud.png'>"
+    return "<img src='../../static/wordCloud.png'>"
 
 
 @app.route('/')
