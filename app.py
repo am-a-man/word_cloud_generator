@@ -2,7 +2,12 @@ import string
 from flask import Flask
 import requests
 from ast import literal_eval
+from flask import send_file
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
 import json
 
 
@@ -67,7 +72,7 @@ def test(keyword):
 def getData(keyword):
     print("[root]: processing GET request at '/api/v1/<string:keyword>'")
     test(keyword)
-    return "<img src='../../static/wordCloud.png'>"
+    return send_file("./static/wordCloud.png", mimetype='image/gif')
 
 
 @app.route('/')
